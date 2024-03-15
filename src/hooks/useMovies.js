@@ -1,4 +1,4 @@
-import listOfMovies from './mockups/movies.json';
+import listOfMovies from '../mockups/movies.json';
 
 export function useMovies(){
     const movies = listOfMovies.Search;

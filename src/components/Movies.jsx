@@ -16,7 +16,7 @@ function NoMoviesResults() {
   return <p>No se encontraron películas para esta búsqueda</p>;
 }
 
-export default function Movies({ movies }) {
+export function Movies({ movies }) {
   const hasMovies = movies?.length > 0;
   return hasMovies ? <ListOfMovies movies={movies} /> : <NoMoviesResults />;
 }
