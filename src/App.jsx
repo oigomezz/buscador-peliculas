@@ -1,9 +1,9 @@
 import "./App.css";
-import listOfMovies from './mockups/movies.json';
-import { Movies } from './components/Movies.jsx';
+import { Movies } from "./components/Movies.jsx";
+import { useMovies } from "./hooks/useMovies.js";
 
 function App() {
-  const movies = listOfMovies.Search
+  const { movies } = useMovies;
 
   return (
     <div className="page">
