@@ -1,6 +1,10 @@
 import "./App.css";
+import listOfMovies from './mockups/movies.json';
+import { Movies } from './components/Movies.jsx';
 
 function App() {
+  const movies = listOfMovies.Search
+
   return (
     <div className="page">
       <header>
@@ -11,7 +15,7 @@ function App() {
         </form>
       </header>
       <main>
-        <h1>Resultados</h1>
+        <Movies movies={movies} />
       </main>
     </div>
   );
