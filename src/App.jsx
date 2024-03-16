@@ -4,7 +4,7 @@ import { useMovies } from "./hooks/useMovies.js";
 import { Movies } from "./components/Movies.jsx";
 
 function useSearch() {
-  const [search, updateSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
   const isFirstInput = useRef(true);
 
@@ -19,7 +19,7 @@ function useSearch() {
       return;
     }
 
-    if (search.match(/^\d+$/)) {
+    if (RegExp(/^\d+$/).exec(search)) {
       setError("No se puede buscar una pelicula con un numero");
       return;
     }
@@ -31,21 +31,21 @@ function useSearch() {
 
     setError(null);
   }, [search]);
-  return { search, updateSearch, error };
+  return { search, setSearch, error };
 }
 
 function App() {
-  const { movies } = useMovies();
-  const { search, updateSearch, error } = useSearch();
+  const { search, setSearch, error } = useSearch();
+  const { movies, getMovies } = useMovies({ search});
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ search });
+    getMovies({ search });
   };
 
   const handleChange = (event) => {
     const newQuery = event.target.value;
-    updateSearch(newQuery);
+    setSearch(newQuery);
   };
 
   return (
