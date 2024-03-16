@@ -1,31 +1,13 @@
 import { useState } from "react";
-// import listOfMovies from "../mockups/movies.json";
-import noResponse from "../mockups/no-response.json";
+import { searchMovies } from "../services/movies";
 
 export function useMovies({ search }) {
-  const [responseMovie, setResponseMovie] = useState([]);
-  const movies = responseMovie.Search;
+  const [movies, setMovies] = useState([]);
 
-  const mappedMovies = movies?.map((movie) => ({
-    id: movie.imdbID,
-    title: movie.Title,
-    year: movie.Year,
-    image: movie.Poster,
-  }));
-
-  const getMovies = () => {
-    if (search) {
-      // setResponseMovie(listOfMovies);
-      fetch(`https://www.omdbapi.com/?apikey=c997ecfc&s=${search}`).then(
-        (res) =>
-          res.json().then((json) => {
-            setResponseMovie(json);
-          })
-      );
-    } else {
-      setResponseMovie(noResponse);
-    }
+  const getMovies = async () => {
+    const newMovies = await searchMovies({ search });
+    setMovies(newMovies);
   };
 
-  return { movies: mappedMovies, getMovies };
+  return { movies, getMovies };
 }

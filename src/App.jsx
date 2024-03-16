@@ -4,8 +4,8 @@ import { useMovies } from "./hooks/useMovies.js";
 import { Movies } from "./components/Movies.jsx";
 
 function useSearch() {
-  const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
+  const [search, setSearch] = useState("");
   const isFirstInput = useRef(true);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function useSearch() {
 
 function App() {
   const { search, setSearch, error } = useSearch();
-  const { movies, getMovies } = useMovies({ search});
+  const { movies, getMovies } = useMovies({ search });
 
   const handleSubmit = (event) => {
     event.preventDefault();
