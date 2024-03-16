@@ -4,8 +4,8 @@ import { useMovies } from "./hooks/useMovies.js";
 import { Movies } from "./components/Movies.jsx";
 
 function useSearch() {
-  const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
+  const [error, setError] = useState(null);
   const isFirstInput = useRef(true);
 
   useEffect(() => {
@@ -15,28 +15,29 @@ function useSearch() {
     }
 
     if (search === "") {
-      setError("No se puede buscar una pelicula vacia");
+      setError("No se puede buscar una película vacía");
       return;
     }
 
     if (RegExp(/^\d+$/).exec(search)) {
-      setError("No se puede buscar una pelicula con un numero");
+      setError("No se puede buscar una película con un número");
       return;
     }
 
     if (search.length < 3) {
-      setError("La busqueda debe tener al menos 3 caracteres");
+      setError("La búsqueda debe tener al menos 3 caracteres");
       return;
     }
 
     setError(null);
   }, [search]);
+
   return { search, setSearch, error };
 }
 
 function App() {
   const { search, setSearch, error } = useSearch();
-  const { movies, getMovies } = useMovies({ search });
+  const { movies, getMovies, loading } = useMovies({ search });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -67,9 +68,7 @@ function App() {
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </header>
-      <main>
-        <Movies movies={movies} />
-      </main>
+      <main>{loading ? <p>Cargando...</p> : <Movies movies={movies} />}</main>
     </div>
   );
 }
