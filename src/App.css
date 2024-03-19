@@ -14,7 +14,7 @@ main {
 }
 
 form {
-  display: flex;
+  display: flexbox;
   justify-content: center;
   align-items: center;
 }
@@ -29,4 +29,26 @@ form {
 
   width: 100%;
   gap: 20px;
+}
+
+form input {
+  width: 80%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.row label {
+  padding: 12px;
+}
+
+.row input {
+  margin: auto 0;
+}
+
+.row button {
+  margin: auto;
 }

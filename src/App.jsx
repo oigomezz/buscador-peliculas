@@ -70,18 +70,24 @@ function App() {
       <header>
         <h1>Buscador de películas</h1>
         <form className="form" onSubmit={handleSubmit}>
-          <input
-            style={{
-              border: "1px solid transparent",
-              borderColor: error ? "red" : "transparent",
-            }}
-            onChange={handleChange}
-            value={search}
-            name="query"
-            placeholder="Avengers, Star Wars, The Matrix..."
-          />
-          <input type="checkbox" onChange={handleSort} checked={sort} />
-          <button type="submit">Buscar</button>
+          <div className="row">
+            <input
+              style={{
+                border: "1px solid transparent",
+                borderColor: error ? "red" : "transparent",
+              }}
+              onChange={handleChange}
+              value={search}
+              name="query"
+              placeholder="Avengers, Star Wars, The Matrix..."
+            />
+            <button type="submit">Buscar</button>
+          </div>
+
+          <div className="row">
+            <input type="checkbox" onChange={handleSort} checked={sort} />
+            <label>Ordenar alfabeticamente</label>
+          </div>
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </header>
