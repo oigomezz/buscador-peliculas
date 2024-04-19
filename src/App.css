@@ -45,6 +45,10 @@ form input {
   padding: 12px;
 }
 
+.row label input {
+  margin-right: 10px;
+}
+
 .row input {
   margin: auto 0;
 }

@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import debounce from "just-debounce-it";
 
 function useSearch() {
-  const [search, updateSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
   const isFirstInput = useRef(true);
 
@@ -20,7 +20,7 @@ function useSearch() {
       return;
     }
 
-    if (search.match(/^\d+$/)) {
+    if (RegExp(/^\d+$/).exec(search)) {
       setError("No se puede buscar una película con un número");
       return;
     }
@@ -33,13 +33,13 @@ function useSearch() {
     setError(null);
   }, [search]);
 
-  return { search, updateSearch, error };
+  return { search, setSearch, error };
 }
 
 function App() {
   const [sort, setSort] = useState(false);
 
-  const { search, updateSearch, error } = useSearch();
+  const { search, setSearch, error } = useSearch();
   const { movies, loading, getMovies } = useMovies({ search, sort });
 
   const debouncedGetMovies = useCallback(
@@ -61,7 +61,7 @@ function App() {
 
   const handleChange = (event) => {
     const newSearch = event.target.value;
-    updateSearch(newSearch);
+    setSearch(newSearch);
     debouncedGetMovies(newSearch);
   };
 
@@ -85,8 +85,11 @@ function App() {
           </div>
 
           <div className="row">
-            <input type="checkbox" onChange={handleSort} checked={sort} />
-            <label>Ordenar alfabeticamente</label>
+            <label>
+              <input type="checkbox" onChange={handleSort} checked={sort} />
+              {/**/}
+              Ordenar alfabeticamente
+            </label>
           </div>
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
