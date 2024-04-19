@@ -25,3 +25,5 @@ Primera iteración:
 ✅ Haz que la búsqueda se haga automáticamente al escribir.
 
 ✅ Evita que se haga la búsqueda continuamente al escribir (debounce)
+
+Puedes visitar la web: [Live Demo](https://buscador-peliculas-ten.vercel.app/)
